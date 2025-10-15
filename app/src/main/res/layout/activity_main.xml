@@ -3,6 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -44,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="300dp"
             android:layout_marginTop="24dp"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="0dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +57,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/placeholder_shirt"
+                android:background="@drawable/bottom_rounded_corners"
                 tools:srcCompat="@tools:sample/backgrounds/scenic"
                 android:contentDescription="Ảnh áo sơ mi" />
 
@@ -172,4 +174,3 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
-
