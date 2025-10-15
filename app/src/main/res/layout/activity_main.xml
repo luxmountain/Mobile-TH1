@@ -1,136 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Sử dụng ScrollView để đảm bảo giao diện có thể cuộn trên các màn hình nhỏ -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".MainActivity">
+    android:background="#FFFFFF"
+    tools:context=".ProductDetailActivity">
 
-    <LinearLayout
+    <!-- ConstraintLayout cho phép định vị các thành phần một cách linh hoạt -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="24dp">
 
+        <!-- Tiêu đề chính "Explore" -->
         <TextView
+            android:id="@+id/textViewExplore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Explore"
             android:textColor="@android:color/black"
             android:textSize="32sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Tiêu đề phụ "Best trendy collection!" -->
         <TextView
+            android:id="@+id/textViewSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="Best trendy collection!"
-            android:textSize="16sp" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewExplore" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+        <!-- CardView để chứa hình ảnh sản phẩm với các góc bo tròn -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewImage"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="24dp"
             app:cardCornerRadius="20dp"
-            app:cardElevation="4dp">
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewSubtitle">
 
             <ImageView
+                android:id="@+id/imageViewProduct"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/shirt_image"
-                android:contentDescription="Premium Tagerine Shirt" />
-        </androidx.cardview.widget.CardView>
+                android:src="@drawable/placeholder_shirt"
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                android:contentDescription="Ảnh áo sơ mi" />
 
-        <TextView
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Dấu chấm chỉ báo của slider ảnh -->
+        <LinearLayout
+            android:id="@+id/dotsIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="—   ·   ·   ·"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/cardViewImage"
+            app:layout_constraintStart_toStartOf="@id/cardViewImage"
+            app:layout_constraintEnd_toEndOf="@id/cardViewImage">
+            <View
+                android:layout_width="24dp"
+                android:layout_height="6dp"
+                android:background="@drawable/dot_active" />
+            <View
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/dot_inactive" />
+        </LinearLayout>
+
+
+        <!-- Tên sản phẩm -->
+        <TextView
+            android:id="@+id/textViewProductName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Premium Tagerine Shirt"
+            android:textColor="@android:color/black"
             android:textSize="24sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"/>
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardViewImage"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayoutColors"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <!-- Nhóm các lựa chọn màu sắc -->
+        <LinearLayout
+            android:id="@+id/linearLayoutColors"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textViewProductName"
+            app:layout_constraintBottom_toBottomOf="@id/textViewProductName"
+            android:gravity="center">
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/color_swatch_1" />
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/color_swatch_2" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/product_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Premium\nTagerine Shirt"
-                android:textColor="@android:color/black"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/color_swatches"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-
-            <LinearLayout
-                android:id="@+id/color_swatches"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/color_swatch_1"
-                    android:layout_marginEnd="8dp"/>
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/color_swatch_2"/>
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <!-- Giá sản phẩm -->
+        <TextView
+            android:id="@+id/textViewPrice"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="32dp"
+            android:text="$257.85"
+            android:textColor="@android:color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewProductName" />
 
-            <TextView
-                android:id="@+id/product_price"
+        <!-- (THAY ĐỔI) Container cho các nút hành động, được đặt theo chiều dọc -->
+        <LinearLayout
+            android:id="@+id/buttonContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/textViewPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textViewPrice">
+
+            <!-- Nút "Add To Cart" -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonAddToCart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$360.13"
-                android:textColor="@android:color/black"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add To Cart"
-                android:textColor="@color/orange"
+                android:backgroundTint="#F9881F"
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp"
-                android:background="@drawable/button_add_to_cart_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Add To Cart"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                app:cornerRadius="20dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Nút "Pay Now" -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonPayNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#F9881F"
+                android:text="Pay Now"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                app:cornerRadius="20dp" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/button_pay_now_background"
-            android:text="Pay Now"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+        </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
+
